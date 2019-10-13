@@ -23,6 +23,10 @@ beforeAll(async () => {
   request = supertest(server);
 });
 
+afterEach(async () => {
+  await db.dropDatabase();
+});
+
 afterAll(async () => {
   await disconnect();
 });

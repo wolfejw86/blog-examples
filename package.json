@@ -1,0 +1,27 @@
+{
+  "name": "blog-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mongo-csv-example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolfejw86/blog-examples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolfejw86/blog-examples/issues"
+  },
+  "homepage": "https://github.com/wolfejw86/blog-examples#readme",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "mongodb": "^3.3.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
