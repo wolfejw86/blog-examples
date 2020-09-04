@@ -2,7 +2,7 @@
 logs
 *.log
 npm-debug.log*
-
+.hidden
 # Runtime data
 pids
 *.pid
@@ -38,7 +38,8 @@ jspm_packages
 
 # 0x
 profile-*
-
+# docker volume
+data
 # mac files
 .DS_Store
 
