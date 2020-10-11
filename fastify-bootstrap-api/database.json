@@ -1,0 +1,4 @@
+{
+  "dev": { "ENV": "POSTGRES_URI" },
+  "sql-file": true
+}
