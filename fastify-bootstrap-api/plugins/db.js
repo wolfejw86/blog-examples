@@ -25,11 +25,10 @@ module.exports = fp(async function (fastify, opts) {
     await db.$pool.end();
     done();
   });
+
   const migrationResults = await runMigrations();
 
   if (migrationResults.length > 0) {
     fastify.log.info({ migrationsCount: migrationResults.length, msg: 'Successful migrations run' })
   }
-
-
-});
+}, { name: 'db' });

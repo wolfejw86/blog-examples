@@ -10,7 +10,7 @@ module.exports = fp(function (fastify, opts, next) {
     return 'hugs'
   })
   next()
-})
+}, { name: 'support' })
 
 // If you prefer async/await, use the following
 //

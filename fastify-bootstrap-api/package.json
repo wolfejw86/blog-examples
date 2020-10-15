@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tap test/**/*.test.js",
     "start": "fastify start -l info app.js",
+    "test": "jest --coverage --runInBand",
     "debug": "fastify start -d -I 9229 -l info app.js",
     "dev": "fastify start -w --ignore-watch='data' -l info -P app.js"
   },
@@ -24,9 +24,11 @@
     "fastify-cli": "^1.5.0",
     "fastify-plugin": "^1.5.0",
     "fastify-swagger": "^2.6.0",
+    "jest": "^26.5.3",
     "pg-promise": "^10.5.7"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.14",
     "tap": "^12.5.3"
   }
 }

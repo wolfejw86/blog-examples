@@ -22,4 +22,4 @@ module.exports = fp(function (fastify, opts, next) {
   })
 
   next()
-})
+}, { name: 'swagger' })
