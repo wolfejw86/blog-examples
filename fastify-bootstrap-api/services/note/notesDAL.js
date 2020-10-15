@@ -1,7 +1,7 @@
 
 const NotesDAL = (db) => {
   const createNote = async (title, body) => {
-   const { id } = await db.one(
+    const { id } = await db.one(
       'INSERT INTO notes (title, body) VALUES ($1, $2) RETURNING id',
       [title, body]
     );
@@ -9,8 +9,16 @@ const NotesDAL = (db) => {
     return { id, title, body };
   };
 
-  const getNotes = () => {
-    return db.manyOrNone('SELECT id, title, body FROM notes');
+  const getNotes = (vectorSearch) => {
+    const queryArgs = [];
+    let query = 'SELECT id, title, body FROM notes';
+
+    if (vectorSearch) {
+      queryArgs.push(`${vectorSearch}:*`);
+      query += ' WHERE body_vector @@ to_tsquery($1) LIMIT 10';
+    }
+
+    return db.manyOrNone(query, queryArgs);
   };
 
   const updateNote = async (id, title, body) => {
