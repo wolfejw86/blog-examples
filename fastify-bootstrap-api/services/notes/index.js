@@ -7,7 +7,7 @@ module.exports = function (fastify, opts, next) {
 
   fastify.route({
     method: 'GET',
-    url: '/notes',
+    url: '/',
     schema: {
       tags: ['Notes'],
       description: 'Get all notes',
@@ -33,7 +33,7 @@ module.exports = function (fastify, opts, next) {
 
   fastify.route({
     method: 'POST',
-    url: '/notes',
+    url: '/',
     schema: {
       tags: ['Notes'],
       description: 'Create a note',
@@ -60,7 +60,7 @@ module.exports = function (fastify, opts, next) {
 
   fastify.route({
     method: 'PUT',
-    url: '/notes/:id',
+    url: '/:id',
     schema: {
       tags: ['Notes'],
       description: 'Update a note',
@@ -95,7 +95,7 @@ module.exports = function (fastify, opts, next) {
 
   fastify.route({
     method: 'DELETE',
-    url: '/notes/:id',
+    url: '/:id',
     schema: {
       tags: ['Notes'],
       description: 'Delete a note - WARNING - PERMANENT',
