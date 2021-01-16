@@ -17,12 +17,16 @@ module.exports = async function (fastify, opts) {
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
     options: Object.assign({}, opts)
-  })
+  });
 
   // This loads all plugins defined in services
   // define your routes in one of these
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'services'),
     options: Object.assign({ prefix: '/api' }, opts)
-  })
+  });
+
+  if (process.env.NODE_ENV === 'development') {
+    fastify.log.info(fastify.printRoutes());
+  }
 }
