@@ -4,7 +4,6 @@ const NotesDAL = require('./notesDAL');
 module.exports = function (fastify, opts, next) {
   const notesDAL = NotesDAL(fastify.db);
 
-
   fastify.route({
     method: 'GET',
     url: '/',
@@ -24,7 +23,7 @@ module.exports = function (fastify, opts, next) {
         }
       }
     },
-    handler: async (request, reply) => {
+    handler: async (request) => {
       const vectorSearch = request.query['filter[body]'];
 
       return notesDAL.getNotes(vectorSearch);

@@ -9,7 +9,7 @@ test('should create a note via POST route', async () => {
   };
 
   const serverResponse = await fastify.inject({
-    url: '/notes',
+    url: '/api/notes',
     method: 'POST',
     payload: requestPayload,
   });

@@ -9,6 +9,7 @@
   "scripts": {
     "start": "fastify start -l info app.js",
     "test": "jest --coverage --runInBand",
+    "test:watch": "jest --watch --runInBand",
     "debug": "fastify start -d -I 9229 -l info app.js",
     "dev": "fastify start -w --ignore-watch='data' -l info -P app.js"
   },
@@ -16,13 +17,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "db-migrate": "^0.11.12",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^8.2.0",
     "fastify": "^3.9.2",
     "fastify-autoload": "^3.4.0",
     "fastify-cli": "^2.7.0",
+    "fastify-cookie": "^5.1.0",
     "fastify-plugin": "^3.0.0",
+    "fastify-session": "^5.2.1",
     "fastify-swagger": "^3.5.0",
     "jest": "^26.6.3",
     "pg-promise": "^10.8.7"

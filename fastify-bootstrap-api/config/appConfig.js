@@ -7,7 +7,7 @@ function loadEnvironmentVariable(keyname) {
 
   return envVar;
 }
-
 module.exports = {
   postgresUri: loadEnvironmentVariable('POSTGRES_URI'),
+  sessionSecret: loadEnvironmentVariable('SESSION_SECRET')
 };

@@ -1,5 +1,5 @@
 'use strict'
-
+const fs = require('fs');
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 
@@ -24,5 +24,14 @@ module.exports = async function (fastify, opts) {
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'services'),
     options: Object.assign({ prefix: '/api' }, opts)
+  });
+
+  fastify.get('/', (req, reply) => {
+    reply.header('content-type', 'text/html');
+    reply.send(fs.createReadStream(path.join(__dirname, 'index.html')))
   })
+
+  if (process.env.NODE_ENV === 'development')
+    fastify.log.info(fastify.printRoutes());
 }
+

@@ -21,10 +21,11 @@ function runMigrations() {
 module.exports = fp(async function (fastify, opts) {
   const db = pgp(appConfig.postgresUri);
 
-  fastify.decorate('db', db).addHook('onClose', async (instance, done) => {
-    await db.$pool.end();
-    done();
-  });
+  fastify.decorate('db', db)
+    .addHook('onClose', async (instance, done) => {
+      await db.$pool.end();
+      done();
+    });
 
   const migrationResults = await runMigrations();
 
