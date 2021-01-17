@@ -2,13 +2,16 @@
 const fastify = require('fastify');
 const fp = require('fastify-plugin');
 const app = require('../app');
+const setupEnv = require('./setupEnv');
 
-const clearDatabaseSql = `DELETE FROM notes;`
+const clearDatabaseSql = `DELETE FROM notes; DELETE FROM users;`
 
+/**
+ * @returns {import('fastify').FastifyInstance}
+ */
 module.exports = function setupTestEnvironment() {
   // setup environment variables
-  process.env.POSTGRES_URI = 'postgres://notes_admin:localhost@localhost:5432/notes_db_test'
-
+  setupEnv();
   // setup fastify server
   const server = fastify({
     logger: {
