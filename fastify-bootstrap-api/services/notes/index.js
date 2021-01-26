@@ -1,9 +1,17 @@
 const { noteSchema } = require('./schemas');
 const NotesDAL = require('./notesDAL');
+const { isLoggedIn } = require('../../middleware/isLoggedIn');
 
+/**
+ * 
+ * @param {import('fastify').FastifyInstance} fastify 
+ * @param {*} opts 
+ * @param {*} next 
+ */
 module.exports = function (fastify, opts, next) {
   const notesDAL = NotesDAL(fastify.db);
 
+  fastify.addHook('preHandler', isLoggedIn);
 
   fastify.route({
     method: 'GET',
@@ -26,8 +34,9 @@ module.exports = function (fastify, opts, next) {
     },
     handler: async (request, reply) => {
       const vectorSearch = request.query['filter[body]'];
+      const userId = request.user;
 
-      return notesDAL.getNotes(vectorSearch);
+      return notesDAL.getNotes(vectorSearch, userId);
     }
   });
 
@@ -51,8 +60,8 @@ module.exports = function (fastify, opts, next) {
     },
     handler: async (request, reply) => {
       const { title, body } = request.body;
-
-      const newNote = await notesDAL.createNote(title, body);
+      const userId = request.user;
+      const newNote = await notesDAL.createNote(title, body, userId);
 
       return newNote;
     }
@@ -86,8 +95,9 @@ module.exports = function (fastify, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params;
       const { title, body } = request.body;
+      const userId = request.user;
 
-      const updatedNote = await notesDAL.updateNote(id, title, body);
+      const updatedNote = await notesDAL.updateNote(id, title, body, userId);
 
       return updatedNote;
     }
@@ -111,7 +121,17 @@ module.exports = function (fastify, opts, next) {
       }
     },
     handler: async (request, reply) => {
-      await notesDAL.deleteNote(request.params.id);
+      const userId = request.user;
+      const noteId = request.params.id;
+
+      try {
+        await notesDAL.findNoteById(noteId, userId);
+      } catch (error) {
+        reply.code(404);
+        throw new Error('Resource not found');
+      }
+
+      await notesDAL.deleteNote(noteId, userId);
 
       reply.status(204);
     }
