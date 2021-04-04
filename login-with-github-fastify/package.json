@@ -1,0 +1,48 @@
+{
+  "name": "login-with-github-fastify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run build:ts && tsc -p test/tsconfig.test.json && tap test/**/*.test.ts",
+    "start": "npm run build:ts && fastify start -l info dist/app.js",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --exec node --inspect -r ts-node/register src/server.ts",
+    "build:ts": "tsc",
+    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\"  \"tsc -w\" \"fastify start -w -l info -P dist/app.js\""
+  },
+  "keywords": [],
+  "author": "jenkins-x-bot",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/core": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "fastify": "^3.0.0",
+    "fastify-autoload": "^3.3.1",
+    "fastify-cli": "^2.9.1",
+    "fastify-cookie": "^5.3.0",
+    "fastify-grant": "^5.4.8",
+    "fastify-plugin": "^3.0.0",
+    "fastify-sensible": "^3.1.0",
+    "fastify-session": "^5.2.1",
+    "grant": "^5.4.12"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.14",
+    "@types/tap": "^14.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "concurrently": "^6.0.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "fastify-tsconfig": "^1.0.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "tap": "^14.11.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^4.1.3"
+  }
+}
